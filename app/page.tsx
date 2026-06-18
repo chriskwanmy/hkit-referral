@@ -161,6 +161,164 @@ export default function Home() {
   }, [jobs, areaFilter, remoteFilter]);
 
   return (
-    <div>HELLO</div>
+    <main className="min-h-screen bg-slate-50">
+      {/* Header */}
+      <div className="border-b bg-white">
+        <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold">
+              Community Referral Board
+            </h1>
+
+            <p className="text-gray-600 mt-1">
+              Community-submitted referral opportunities
+            </p>
+          </div>
+
+          <a
+            href={FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-lg bg-black px-5 py-3 text-white"
+          >
+            Submit Referral
+          </a>
+        </div>
+      </div>
+
+      {/* Sticky Filter */}
+      <div className="sticky top-0 z-50 border-b bg-white shadow-sm">
+        <div className="mx-auto max-w-7xl px-6 py-3">
+          <div className="flex flex-wrap items-center gap-4">
+            <select
+              value={areaFilter}
+              onChange={(e) =>
+                setAreaFilter(e.target.value)
+              }
+              className="rounded-lg border px-3 py-2"
+            >
+              <option>All</option>
+              <option>Toronto</option>
+              <option>Vancouver</option>
+              <option>Calgary</option>
+              <option>Others</option>
+            </select>
+
+            <select
+              value={remoteFilter}
+              onChange={(e) =>
+                setRemoteFilter(e.target.value)
+              }
+              className="rounded-lg border px-3 py-2"
+            >
+              <option>All</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+
+            <div className="text-sm text-gray-500">
+              {filteredJobs.length} opportunities
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Cards */}
+      <div className="mx-auto max-w-7xl px-6 py-6">
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <div className="space-y-4">
+            {filteredJobs.map((job, index) => (
+              <div
+                key={index}
+                className="rounded-xl border bg-white p-5 shadow-sm hover:shadow-md transition"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+                  {/* Company */}
+                  <div className="lg:col-span-2">
+                    <h2 className="text-xl font-bold">
+                      {job.company}
+                    </h2>
+                  </div>
+
+                  {/* Role */}
+                  <div className="lg:col-span-4">
+                    <div className="text-xs uppercase text-gray-500 mb-1">
+                      Hiring Role / JD
+                    </div>
+
+                    {job.role.startsWith("http") ? (
+                      <a
+                        href={job.role}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:underline break-all"
+                      >
+                        {job.role}
+                      </a>
+                    ) : (
+                      <div className="text-sm">
+                        {job.role || "-"}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Level */}
+                  <div className="lg:col-span-1">
+                    <div className="text-xs uppercase text-gray-500 mb-1">
+                      Level
+                    </div>
+
+                    <div>{job.level || "-"}</div>
+                  </div>
+
+                  {/* Base */}
+                  <div className="lg:col-span-2">
+                    <div className="text-xs uppercase text-gray-500 mb-1">
+                      Base
+                    </div>
+
+                    <div>{job.base || "-"}</div>
+                  </div>
+
+                  {/* Remote / Mode */}
+                  <div className="lg:col-span-2">
+                    <div className="text-xs uppercase text-gray-500 mb-1">
+                      Details
+                    </div>
+
+                    <div className="space-y-1 text-sm">
+                      <div>
+                        Remote:{" "}
+                        {formatRemote(job.remote)}
+                      </div>
+
+                      <div>
+                        Mode:{" "}
+                        {formatWorkingMode(
+                          job.workingMode
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Contact */}
+                  <div className="lg:col-span-1">
+                    <div className="text-xs uppercase text-gray-500 mb-1">
+                      Contact
+                    </div>
+
+                    <ContactButton
+                      contact={job.contact}
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </main>
   );
 }
