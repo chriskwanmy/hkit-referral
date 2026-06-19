@@ -35,22 +35,27 @@ export const metadata: Metadata = {
     description:
       "加拿大香港 IT 人社群 — 職位 Referral 板 & 真實面試題庫，助你在加拿大搵工。",
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico" },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      {/*
+        Viewport must NOT disable user-scalable — required by WCAG 1.4.4
+        Next.js sets a safe default; we leave it as-is.
+      */}
+      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+        {/* Skip-to-main: the first interactive element on every page */}
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+
         <Nav />
         {children}
       </body>
