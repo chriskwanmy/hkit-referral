@@ -16,6 +16,8 @@ type Job = {
 const FORM_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLSdYdTpYliFqBRHX5NDcb_aR_8w5wGxrAbBwq6kROU6p00KRCA/viewform";
 
+const RESUME_BUILDER_URL = "https://resume.canadeal.ca";
+
 function getArea(base: string) {
   const b = base.toLowerCase();
   if (b.includes("toronto"))   return "Toronto";
@@ -167,20 +169,36 @@ export default function Home() {
             </p>
           </div>
 
-          <a
-            href={FORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Submit a referral (opens in new tab)"
-            className={
-              "rounded-lg bg-slate-900 px-5 py-3 text-sm font-semibold text-white " +
-              "hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 " +
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 " +
-              "min-h-[44px] inline-flex items-center transition-colors"
-            }
-          >
-            Submit Referral
-          </a>
+          <div className="flex gap-3">
+            <a
+              href={RESUME_BUILDER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="AI Resume Builder (opens in new tab)"
+              className={
+                "rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white " +
+                "hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 " +
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 " +
+                "min-h-[44px] inline-flex items-center transition-colors"
+              }
+            >
+              AI Resume Builder
+            </a>
+            <a
+              href={FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Submit a referral (opens in new tab)"
+              className={
+                "rounded-lg bg-slate-900 px-5 py-3 text-sm font-semibold text-white " +
+                "hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 " +
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 " +
+                "min-h-[44px] inline-flex items-center transition-colors"
+              }
+            >
+              Submit Referral
+            </a>
+          </div>
         </div>
       </header>
 
